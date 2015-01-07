@@ -1,0 +1,14 @@
+{
+  "name": "frames",
+  "version": "0.0.1",
+  "description": "Frames is a fun little Javascript MVC powered by the URL.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "JP Given",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^0.4.5"
+  }
+}
