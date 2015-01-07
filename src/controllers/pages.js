@@ -6,9 +6,17 @@ var Pages = (function() {
 
   Pages.prototype = {
     index: function() {
+
+      // Construct model instance.
       var page = new Page();
 
-      frames_core.renderView(page.getData())
+      // Render view passing data to said view.
+      frames_core.renderView(page.getData());
+
+      // View rendered subscriber for post processing.
+      frames_core.viewRendered(function() {
+        
+      });
     }
   };
 

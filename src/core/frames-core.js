@@ -80,8 +80,14 @@ FramesCore = (function() {
 
       setTimeout(function() {
         frames_helper.hideLoader();
+        PubSub.publish("view_rendered");
       });
     });
+
+  FramesCore.prototype.viewRendered = function(callback) {
+    PubSub.clearAllSubscriptions();
+    PubSub.subscribe("view_rendered", callback);
+  }
 
   };
 
