@@ -73,13 +73,16 @@ FramesCore = (function() {
   };
 
   FramesCore.prototype.renderView = function(options) {
-    nunjucks.render("pages/index.html", options.data, function(err, res) {
+    var page = frames_core.controller.toLocaleLowerCase() + "/" + frames_core.action.toLocaleLowerCase() + ".html"
+
+    nunjucks.render(page, options.data, function(err, res) {
       $("#yield").html(res);
-      
+
       setTimeout(function() {
         frames_helper.hideLoader();
-      }, 10);
+      });
     });
+
   };
 
   return FramesCore;
