@@ -38,6 +38,15 @@ module.exports = function(grunt) {
           dest: 'build/<%= pkg.name %>-<%= pkg.version %>.min.js'
         }]
       }
+    },
+    wrap: {
+      basic: {
+        src: ['build/<%= pkg.name %>-<%= pkg.version %>.min.js'],
+        dest: 'build/<%= pkg.name %>-<%= pkg.version %>.min.js',
+        options: {
+          wrapper: ['(function($) {\n', '\n}).call(window.jQuery)']
+        }
+      }
     }
   });
 
@@ -45,6 +54,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-rename');
+  grunt.loadNpmTasks('grunt-wrap');
   grunt.loadNpmTasks('grunt-wiredep');
   grunt.loadNpmTasks('grunt-usemin');
 
@@ -54,7 +64,8 @@ module.exports = function(grunt) {
     'concat',
     'uglify',
     'cssmin',
-    'rename'
+    'rename',
+    'wrap'
   ]);
 
 };
