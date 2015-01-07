@@ -18,6 +18,8 @@
     "underscore": "~1.7.0",
     "nunjucks": "~1.1.0",
     "javascript-route-matcher": "~0.1.0",
-    "normalize.css": "~3.0.2"
+    "normalize.css": "~3.0.2",
+    "history.js": "~1.8.0",
+    "spin.js": "~2.0.2"
   }
 }

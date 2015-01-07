@@ -24,6 +24,13 @@ FramesCore = (function() {
           length = src.substr(src.lastIndexOf('/') + 1).length;
           if (src.indexOf("frames-") > -1) {
             _ths.base_path = src.substr(0, l - length);
+            if (_ths.base_path.indexOf('core') > -1) {
+              _ths.base_path = _ths.base_path + '../'
+            }
+            nunjucks.configure(_ths.base_path + '/views', {
+              noCache: true,
+              autoescape: false
+            });
           }
           _results.push(--i);
         }
@@ -66,7 +73,13 @@ FramesCore = (function() {
   };
 
   FramesCore.prototype.renderView = function(options) {
-    
+    nunjucks.render("pages/index.html", options.data, function(err, res) {
+      $("#yield").html(res);
+      
+      setTimeout(function() {
+        frames_helper.hideLoader();
+      }, 10);
+    });
   };
 
   return FramesCore;

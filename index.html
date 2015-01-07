@@ -10,12 +10,16 @@
 </head>
 <body>
 
+  <div id="yield"></div>
+
   <!-- build:js app.js -->
   <!-- bower:js -->
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/underscore/underscore.js"></script>
   <script src="bower_components/nunjucks/browser/nunjucks.min.js"></script>
   <script src="bower_components/javascript-route-matcher/dist/ba-routematcher.js"></script>
+  <script src="bower_components/history.js/scripts/bundled/html4+html5/native.history.js"></script>
+  <script src="bower_components/spin.js/spin.js"></script>
   <!-- endbower -->
 
   <!-- Frames Core Files -->
@@ -23,6 +27,10 @@
   <script src="src/core/frames-helper.js"></script>
   <script src="src/core/frames-router.js"></script>
   <script src="src/core/frames-construct.js"></script>
+
+  <!-- Your Controllers, Models, and Views -->
+  <script src="src/controllers/pages.js"></script>
+  <script src="src/models/page.js"></script>
 
   <!-- Main Entry File -->
   <script src="src/main.js"></script>
