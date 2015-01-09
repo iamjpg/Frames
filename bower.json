@@ -21,6 +21,7 @@
     "normalize.css": "~3.0.2",
     "history.js": "~1.8.0",
     "spin.js": "~2.0.2",
-    "pubsub-js": "~1.5.0"
+    "pubsub-js": "~1.5.0",
+    "grapnel": "~0.5.1"
   }
 }

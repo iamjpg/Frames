@@ -73,10 +73,18 @@ FramesCore = (function() {
   };
 
   FramesCore.prototype.renderView = function(options) {
-    var page = frames_core.controller.toLocaleLowerCase() + "/" + frames_core.action.toLocaleLowerCase() + ".html"
+
+    var page = frames_core.controller.toLocaleLowerCase() +
+        "/" + frames_core.action.toLocaleLowerCase() +
+        ".html"
+
+    if (!options.append) {
+      $("#yield").empty();
+    }
 
     nunjucks.render(page, options.data, function(err, res) {
-      $("#yield").html(res);
+
+      $("#yield").append(res);
 
       setTimeout(function() {
         frames_helper.hideLoader();
