@@ -14,7 +14,6 @@ var Frames = (function() {
       P.publish(name, data);
     },
     render: function(template, data) {
-      console.log(C.viewDirectory() + template + '.html');
       $.ajax({
         type: 'GET',
         url: C.viewDirectory() + template + '.html',
@@ -23,9 +22,8 @@ var Frames = (function() {
           var append_int = setInterval(function() {
             if ($("#" + template).length > 0) {
               clearInterval(append_int);
-              var t = $("#" + template).html();
-              console.log("++++", data);
-              $("#yield").html(_.template(t, data));
+              var compiled = _.template($("#" + template).html());
+              $("#yield").html(compiled(data));
             }
           }, 10)
 

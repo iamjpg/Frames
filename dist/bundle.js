@@ -4129,11 +4129,12 @@ var Frames = (function() {
           var append_int = setInterval(function() {
             if ($("#" + template).length > 0) {
               clearInterval(append_int);
-              var t = $("#" + template).html();
-              console.log("++++", data);
-              $("#yield").html(_.template(t, data));
+
+              var compiled = _.template($("#" + template).html());
+
+              $("#yield").html(compiled(data));
             }
-          }, 1000)
+          }, 10)
 
         },
         error: function(x, y, z) {
