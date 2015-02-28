@@ -20,8 +20,18 @@ module.exports = function(grunt) {
         dest: 'dist/bundle.js',
       },
     },
+    uglify: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+      },
+      build: {
+        src: './dist/bundle.js',
+        dest: 'build/<%= pkg.version %>.min.js'
+      }
+    },
   });
 
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-browserify');
