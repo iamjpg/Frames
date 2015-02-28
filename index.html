@@ -1,42 +1,26 @@
 <!doctype html>
 <html>
+
 <head>
   <title>Frames</title>
-  <!-- build:css app.css -->
-  <!-- bower:css -->
-  <link rel="stylesheet" href="bower_components/normalize.css/normalize.css" />
-  <!-- endbower -->
-  <!-- endbuild -->
 </head>
+
 <body>
+
+  <h1>Hello, Welcome to Frames</h1>
+
+
+  <ul>
+    <li><a href="#/weather/seattle/wa">Get Seattle Weather</a></li>
+    <li><a href="#/weather/oakland/ca">Get Oakland Weather</a></li>
+    <li><a href="/">Return Home</a></li>
+  </ul>
 
   <div id="yield"></div>
 
-  <!-- build:js app.js -->
-
-  <!-- bower:js -->
-  <script src="bower_components/jquery/dist/jquery.js"></script>
-  <script src="bower_components/underscore/underscore.js"></script>
-  <script src="bower_components/nunjucks/browser/nunjucks.min.js"></script>
-  <script src="bower_components/javascript-route-matcher/dist/ba-routematcher.js"></script>
-  <script src="bower_components/history.js/scripts/bundled/html4+html5/native.history.js"></script>
-  <script src="bower_components/spin.js/spin.js"></script>
-  <script src="bower_components/pubsub-js/src/pubsub.js"></script>
-  <!-- endbower -->
-
-  <!-- Frames Core Files -->
-  <script src="src/core/frames-core.js"></script>
-  <script src="src/core/frames-helper.js"></script>
-  <script src="src/core/frames-router.js"></script>
-  <script src="src/core/frames-construct.js"></script>
-
-  <!-- Your Controllers & Models -->
-  <script src="src/controllers/pages.js"></script>
-  <script src="src/models/page.js"></script>
-
   <!-- Main Entry File -->
-  <script src="src/main.js"></script>
+  <script src="dist/bundle.js"></script>
 
-  <!-- endbuild -->
 </body>
+
 </html>

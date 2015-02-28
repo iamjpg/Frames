@@ -1,71 +1,31 @@
 module.exports = function(grunt) {
-
-  // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    wiredep: {
-      task: {
-        src: [
-          'index.html'
-        ]
+    browserify: {
+      main: {
+        src: 'src/*.js',
+        dest: 'dist/bundle.js'
       }
     },
-    useminPrepare: {
-      html: 'index.html',
+    watch: {
+      files: 'src/*',
+      tasks: ['browserify', 'default']
+    },
+    concat: {
       options: {
-        dest: 'build',
-        flow: {
-          html: {
-            steps: {
-              js: ['concat', 'uglifyjs'],
-              css: ['cssmin']
-            },
-            post: {}
-          }
-        }
-      }
-    },
-    rename: {
-      css: {
-        files: [{
-          src: ['build/app.css'],
-          dest: 'build/<%= pkg.name %>-<%= pkg.version %>.min.css'
-        }]
+        separator: ';',
       },
-      js: {
-        files: [{
-          src: ['build/app.js'],
-          dest: 'build/<%= pkg.name %>-<%= pkg.version %>.min.js'
-        }]
-      }
+      dist: {
+        src: ['src/contrib/*.js', 'dist/bundle.js'],
+        dest: 'dist/bundle.js',
+      },
     },
-    wrap: {
-      basic: {
-        src: ['build/<%= pkg.name %>-<%= pkg.version %>.min.js'],
-        dest: 'build/<%= pkg.name %>-<%= pkg.version %>.min.js',
-        options: {
-          wrapper: ['(function($) {\n', '\n}).call(window.jQuery)']
-        }
-      }
-    }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-rename');
-  grunt.loadNpmTasks('grunt-wrap');
-  grunt.loadNpmTasks('grunt-wiredep');
-  grunt.loadNpmTasks('grunt-usemin');
+  grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-exec');
 
-  // Default task(s).
-  grunt.registerTask('default', [
-    'useminPrepare',
-    'concat',
-    'uglify',
-    'cssmin',
-    'rename',
-    'wrap'
-  ]);
-
-};
+  grunt.registerTask('default', ['browserify', 'watch']);
+}
