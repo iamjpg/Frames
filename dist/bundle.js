@@ -4055,8 +4055,12 @@ exports.$ = exports.Zepto = Zepto;
 })(Zepto)
 },{}],5:[function(require,module,exports){
 var weather = require('./controllers/weather');
+var welcome = require('./controllers/welcome');
 
 var routes = {
+  '': function() {
+    return welcome.init()
+  },
   'weather/:city/:state': function(city, state) {
     return weather.init(city, state);
   }
@@ -4064,9 +4068,9 @@ var routes = {
 
 var router = require('director').Router(routes);
 
-router.init();
+router.init('/');
 
-},{"./controllers/weather":7,"director":1}],6:[function(require,module,exports){
+},{"./controllers/weather":7,"./controllers/welcome":8,"director":1}],6:[function(require,module,exports){
 var Config = (function() {
   var config = {
 
@@ -4089,9 +4093,7 @@ var Weather = (function() {
   var mod = {}
 
   mod.init = function(city, state) {
-    console.log("-------");
     Frames.subscribe("WEATHER_RESPONSE", function(msg, data) {
-      console.log(msg, data);
       Frames.render('weather', data);
     });
     weather.getWeather(city, state);
@@ -4103,7 +4105,21 @@ var Weather = (function() {
 
 module.exports = Weather;
 
-},{"../frames/core":8,"../models/weather":9}],8:[function(require,module,exports){
+},{"../frames/core":9,"../models/weather":10}],8:[function(require,module,exports){
+var Frames = require('../frames/core');
+var Welcome = (function() {
+  mod = {
+    init: function() {
+      Frames.render('welcome')
+    }
+  }
+
+  return mod;
+})();
+
+module.exports = Welcome;
+
+},{"../frames/core":9}],9:[function(require,module,exports){
 var $ = require('zepto-browserify').$;
 var P = require('pubsub-js');
 var C = require('../config/frames_config');
@@ -4120,7 +4136,6 @@ var Frames = (function() {
       P.publish(name, data);
     },
     render: function(template, data) {
-      console.log(C.viewDirectory() + template + '.html');
       $.ajax({
         type: 'GET',
         url: C.viewDirectory() + template + '.html',
@@ -4129,9 +4144,7 @@ var Frames = (function() {
           var append_int = setInterval(function() {
             if ($("#" + template).length > 0) {
               clearInterval(append_int);
-
               var compiled = _.template($("#" + template).html());
-
               $("#yield").html(compiled(data));
             }
           }, 10)
@@ -4150,7 +4163,7 @@ var Frames = (function() {
 
 module.exports = Frames;
 
-},{"../config/frames_config":6,"pubsub-js":2,"underscore":3,"zepto-browserify":4}],9:[function(require,module,exports){
+},{"../config/frames_config":6,"pubsub-js":2,"underscore":3,"zepto-browserify":4}],10:[function(require,module,exports){
 var $ = require('zepto-browserify').$;
 var Frames = require('../frames/core');
 
@@ -4177,4 +4190,4 @@ var Weather = (function() {
 
 module.exports = Weather;
 
-},{"../frames/core":8,"zepto-browserify":4}]},{},[5]);
+},{"../frames/core":9,"zepto-browserify":4}]},{},[5]);
