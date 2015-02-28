@@ -2530,7 +2530,7 @@ router.init();
 
 },{"./controllers/weather":5,"director":1}],5:[function(require,module,exports){
 var weather = require('../models/weather');
-var PubSub = require('pubsub-js');
+var PubSub = require('../frames/pubsub');
 
 var Weather = (function() {
 
@@ -2538,7 +2538,6 @@ var Weather = (function() {
 
   mod.init = function(city, state) {
     console.log("-------");
-    PubSub.unsubscribe("WEATHER_RESPONSE");
     PubSub.subscribe("WEATHER_RESPONSE", function(msg, data) {
       console.log(msg, data);
     });
@@ -2551,9 +2550,30 @@ var Weather = (function() {
 
 module.exports = Weather;
 
-},{"../models/weather":6,"pubsub-js":2}],6:[function(require,module,exports){
+},{"../frames/pubsub":6,"../models/weather":7}],6:[function(require,module,exports){
+var P = require('pubsub-js');
+
+var PubSub = (function() {
+
+  PubSub = {
+    subscribe: function(name, callback) {
+      P.unsubscribe(name);
+      P.subscribe(name, callback);
+    },
+    publish: function(name, data) {
+      P.publish(name, data);
+    }
+  }
+
+  return PubSub;
+
+})();
+
+module.exports = PubSub;
+
+},{"pubsub-js":2}],7:[function(require,module,exports){
 var $ = require('zepto-browserify').$;
-var PubSub = require('pubsub-js');
+var PubSub = require('../frames/pubsub');
 
 var Weather = (function() {
   mod = {}
@@ -2578,4 +2598,4 @@ var Weather = (function() {
 
 module.exports = Weather;
 
-},{"pubsub-js":2,"zepto-browserify":3}]},{},[4]);
+},{"../frames/pubsub":6,"zepto-browserify":3}]},{},[4]);

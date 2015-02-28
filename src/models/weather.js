@@ -1,5 +1,5 @@
 var $ = require('zepto-browserify').$;
-var PubSub = require('pubsub-js');
+var PubSub = require('../frames/pubsub');
 
 var Weather = (function() {
   mod = {}
