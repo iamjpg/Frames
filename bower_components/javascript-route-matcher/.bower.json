@@ -1,7 +1,6 @@
 {
   "name": "javascript-route-matcher",
   "homepage": "https://github.com/cowboy/javascript-route-matcher",
-  "main": "dist/ba-routematcher.js",
   "version": "0.1.0",
   "_release": "0.1.0",
   "_resolution": {
@@ -11,6 +10,5 @@
   },
   "_source": "git://github.com/cowboy/javascript-route-matcher.git",
   "_target": "~0.1.0",
-  "_originalSource": "javascript-route-matcher",
-  "_direct": true
+  "_originalSource": "javascript-route-matcher"
 }
