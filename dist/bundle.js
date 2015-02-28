@@ -2275,12 +2275,10 @@ exports.$ = exports.Zepto = Zepto;
   }
 })(Zepto)
 },{}],3:[function(require,module,exports){
-var $ = require('zepto-browserify').$,
-  weather = require('./controllers/weather');
+var weather = require('./controllers/weather');
 
 var routes = {
   'weather/:city/:state': function(city, state) {
-    console.log(city, state);
     return weather.init(city, state);
   }
 }
@@ -2289,7 +2287,7 @@ var router = require('director').Router(routes);
 
 router.init();
 
-},{"./controllers/weather":4,"director":1,"zepto-browserify":2}],4:[function(require,module,exports){
+},{"./controllers/weather":4,"director":1}],4:[function(require,module,exports){
 var weather = require('../models/weather');
 
 var Weather = (function() {
@@ -2313,12 +2311,15 @@ var Weather = (function() {
   mod = {}
 
   mod.getWeather = function(city, state) {
+    var req = 'http://api.openweathermap.org/data/2.5/weather?q=' +
+      city + ',' + state + '&units=imperial';
+
     $.ajax({
       type: "get",
-      url: 'http://api.openweathermap.org/data/2.5/weather?q=' + city + ',' + state + '&units=imperial',
+      url: req,
       dataType: 'jsonp',
       success: function(res) {
-        console.log(res);
+
       }
     })
   }
