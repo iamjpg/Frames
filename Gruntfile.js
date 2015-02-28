@@ -9,7 +9,7 @@ module.exports = function(grunt) {
     },
     watch: {
       files: 'src/*',
-      tasks: ['default']
+      tasks: ['browserify', 'default']
     },
     concat: {
       options: {
