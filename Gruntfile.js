@@ -3,12 +3,12 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     browserify: {
       main: {
-        src: 'src/*.js',
+        src: 'src/**/*.js',
         dest: 'dist/bundle.js'
       }
     },
     watch: {
-      files: 'src/*',
+      files: 'src/**/*.js',
       tasks: ['browserify', 'default']
     },
     concat: {
