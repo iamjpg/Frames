@@ -1,4 +1,5 @@
 var $ = require('zepto-browserify').$;
+var PubSub = require('pubsub-js');
 
 var Weather = (function() {
   mod = {}
@@ -12,8 +13,9 @@ var Weather = (function() {
       url: req,
       dataType: 'jsonp',
       success: function(res) {
-
+        PubSub.publish("WEATHER_RESPONSE", res);
       }
+
     })
   }
 
