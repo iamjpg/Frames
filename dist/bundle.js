@@ -4075,7 +4075,7 @@ var Config = (function() {
   var config = {
 
     viewDirectory: function() {
-      return '/dist/views/';
+      return FRAMES_VIEW_DIR || '/dist/views/';
     }
 
   }
