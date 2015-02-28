@@ -1,5 +1,5 @@
 var weather = require('../models/weather');
-var PubSub = require('../frames/pubsub');
+var Frames = require('../frames/core');
 
 var Weather = (function() {
 
@@ -7,8 +7,9 @@ var Weather = (function() {
 
   mod.init = function(city, state) {
     console.log("-------");
-    PubSub.subscribe("WEATHER_RESPONSE", function(msg, data) {
+    Frames.subscribe("WEATHER_RESPONSE", function(msg, data) {
       console.log(msg, data);
+      Frames.render('weather', data);
     });
     weather.getWeather(city, state);
   }

@@ -1,5 +1,5 @@
 var $ = require('zepto-browserify').$;
-var PubSub = require('../frames/pubsub');
+var Frames = require('../frames/core');
 
 var Weather = (function() {
   mod = {}
@@ -13,7 +13,7 @@ var Weather = (function() {
       url: req,
       dataType: 'jsonp',
       success: function(res) {
-        PubSub.publish("WEATHER_RESPONSE", res);
+        Frames.publish("WEATHER_RESPONSE", res);
       }
 
     })
