@@ -4183,7 +4183,7 @@ var Weather = (function() {
         Frames.publish("WEATHER_RESPONSE", res);
       }
 
-    })
+    });
   }
 
   return mod;
