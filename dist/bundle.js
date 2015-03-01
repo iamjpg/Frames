@@ -4076,7 +4076,7 @@ var Config = (function() {
   var config = {
 
     viewDirectory: function() {
-      return (typeof FRAMES_VIEW_DIR === "undefined") ? '/dist/views/' : FRAMES_VIEW_DIR;
+      return (typeof FRAMES_VIEW_DIR === "undefined") ? '/src/views/' : FRAMES_VIEW_DIR;
     }
 
   }
