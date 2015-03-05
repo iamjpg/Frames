@@ -3,20 +3,44 @@
 
 <head>
   <title>Frames</title>
+  <meta name="viewport" content="initial-scale=1.0,width=device-width,user-scalable=0" />
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />
+  <link rel="stylesheet" href="/stylesheets/lib.css" />
 </head>
 
 <body>
 
-  <h1>Hello, Welcome to Frames</h1>
+  <header class="push">
+    <div class="container">
+      <div class="row">
+        <div class="twelve columns">
+          <a href="#menu" class="menu-link">&#9776;</a>
+          <div class="logo"></div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-  <ul>
-    <li><a href="#/weather/seattle/wa">Get Seattle Weather</a></li>
-    <li><a href="#/weather/oakland/ca">Get Oakland Weather</a></li>
-    <li><a href="/">Return Home</a></li>
-  </ul>
+  <div id="yield" class="push"></div>
 
-  <div id="yield"></div>
+  <nav id="menu" class="panel" role="navigation">
+    <ul>
+      <li><a href="#/about">About</a></li>
+      <li><a href="#/docs">Docs</a></li>
+      <li><a href="#/todo">Obligatory 'to-do' app</a></li>
+      <li><a href="/">Home</a></li>
+    </ul>
+  </nav>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="javascripts/slide.js"></script>
+
+  <script>
+    $('.menu-link').bigSlide({
+      easyClose: true
+    });
+    $('#menu').css('display', 'block');
+  </script>
 
   <!-- Main Entry File -->
   <script src="dist/bundle.js"></script>
