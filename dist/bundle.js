@@ -4054,23 +4054,27 @@ exports.$ = exports.Zepto = Zepto;
   }
 })(Zepto)
 },{}],5:[function(require,module,exports){
-var weather = require('./controllers/weather');
-var welcome = require('./controllers/welcome');
+var welcome = require('./controllers/welcome'),
+    about = require('./controllers/about'),
+    docs = require('./controllers/docs');
 
 var routes = {
-  '': function() {
+  '/welcome': function() {
     return welcome.init()
   },
-  'weather/:city/:state': function(city, state) {
-    return weather.init(city, state);
+  '/about': function() {
+    return about.init();
+  },
+  '/docs': function() {
+    return docs.init()
   }
 }
 
 var router = require('director').Router(routes);
 
-router.init('/');
+router.init('/welcome');
 
-},{"./controllers/weather":7,"./controllers/welcome":8,"director":1}],6:[function(require,module,exports){
+},{"./controllers/about":7,"./controllers/docs":8,"./controllers/welcome":9,"director":1}],6:[function(require,module,exports){
 
 var Config = (function() {
   var config = {
@@ -4086,27 +4090,34 @@ var Config = (function() {
 module.exports = Config
 
 },{}],7:[function(require,module,exports){
-var weather = require('../models/weather');
 var Frames = require('../frames/core');
-
-var Weather = (function() {
-
-  var mod = {}
-
-  mod.init = function(city, state) {
-    Frames.subscribe("WEATHER_RESPONSE", function(msg, data) {
-      Frames.render('weather', data);
-    });
-    weather.getWeather(city, state);
+var About = (function() {
+  mod = {
+    init: function() {
+      Frames.render('about')
+    }
   }
 
   return mod;
+})()
 
-})();
+module.exports = About;
 
-module.exports = Weather;
+},{"../frames/core":10}],8:[function(require,module,exports){
+var Frames = require('../frames/core');
+var Docs = (function() {
+  mod = {
+    init: function() {
+      Frames.render('docs')
+    }
+  }
 
-},{"../frames/core":9,"../models/weather":10}],8:[function(require,module,exports){
+  return mod;
+})()
+
+module.exports = Docs;
+
+},{"../frames/core":10}],9:[function(require,module,exports){
 var Frames = require('../frames/core');
 var Welcome = (function() {
   mod = {
@@ -4120,7 +4131,7 @@ var Welcome = (function() {
 
 module.exports = Welcome;
 
-},{"../frames/core":9}],9:[function(require,module,exports){
+},{"../frames/core":10}],10:[function(require,module,exports){
 var $ = require('zepto-browserify').$;
 var P = require('pubsub-js');
 var C = require('../config/frames_config');
@@ -4164,31 +4175,4 @@ var Frames = (function() {
 
 module.exports = Frames;
 
-},{"../config/frames_config":6,"pubsub-js":2,"underscore":3,"zepto-browserify":4}],10:[function(require,module,exports){
-var $ = require('zepto-browserify').$;
-var Frames = require('../frames/core');
-
-var Weather = (function() {
-  mod = {}
-
-  mod.getWeather = function(city, state) {
-    var req = 'http://api.openweathermap.org/data/2.5/weather?q=' +
-      city + ',' + state + '&units=imperial';
-
-    $.ajax({
-      type: "get",
-      url: req,
-      dataType: 'jsonp',
-      success: function(res) {
-        Frames.publish("WEATHER_RESPONSE", res);
-      }
-
-    });
-  }
-
-  return mod;
-})()
-
-module.exports = Weather;
-
-},{"../frames/core":9,"zepto-browserify":4}]},{},[5,6,7,8,9,10]);
+},{"../config/frames_config":6,"pubsub-js":2,"underscore":3,"zepto-browserify":4}]},{},[5,6,7,8,9,10]);

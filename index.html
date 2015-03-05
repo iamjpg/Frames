@@ -28,7 +28,7 @@
       <li><a href="#/about">About</a></li>
       <li><a href="#/docs">Docs</a></li>
       <li><a href="#/todo">Obligatory 'to-do' app</a></li>
-      <li><a href="/">Home</a></li>
+      <li><a href="#/welcome">Home</a></li>
     </ul>
   </nav>
 
@@ -40,6 +40,9 @@
       easyClose: true
     });
     $('#menu').css('display', 'block');
+    $('#menu ul li a').on('click', function() {
+      $('.menu-link').bigSlide('close')
+    });
   </script>
 
   <!-- Main Entry File -->
