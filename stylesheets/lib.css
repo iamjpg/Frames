@@ -9,6 +9,11 @@ h3,
 h4 {
   text-transform: uppercase;
 }
+#nav-container {
+  position: relative;
+  z-index: 1000;
+  margin: 20px;
+}
 header {
   padding: 50px;
 }
