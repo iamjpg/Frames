@@ -8,8 +8,8 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: 'src/**/*.js',
-      tasks: ['browserify', 'default']
+      files: ['src/**/*.js', 'src/**/*.html'],
+      tasks: ['copy', 'browserify', 'default']
     },
     concat: {
       options: {
@@ -32,8 +32,7 @@ module.exports = function(grunt) {
     copy: {
       main: {
         files: [
-          // includes files within path and its sub-directories
-          {expand: true, src: ['src/views/**'], dest: 'build/'},
+          {expand: true, cwd: 'src/', src: ['views/**'], dest: 'build/'}
         ],
       },
     },
@@ -46,5 +45,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-exec');
 
-  grunt.registerTask('default', ['browserify', 'watch']);
+  grunt.registerTask('default', ['browserify', 'watch', 'copy']);
 }

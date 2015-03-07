@@ -21,7 +21,7 @@ var Frames = (function() {
             length = src.substr(src.lastIndexOf('/') + 1).length;
             if (src.indexOf("frames.") > -1 || src.indexOf("dist/bundle.") > -1) {
               _ths.base_path = src.substr(0, l - length);
-              _ths.base_path = _ths.base_path;
+              _ths.base_path = _ths.base_path + '../';
               console.log(_ths.base_path);
             }
             _results.push(--i);
@@ -41,7 +41,7 @@ var Frames = (function() {
       var self = this;
       $.ajax({
         type: 'GET',
-        url: self.base_path + 'build/' + template + '.html',
+        url: self.base_path + 'build/views/' + template + '.html',
         success: function(res) {
           if ($("#" + template).length === 0) { $("body").append(res); };
           var append_int = setInterval(function() {
