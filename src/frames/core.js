@@ -38,9 +38,10 @@ var Frames = (function() {
       P.publish(name, data);
     },
     render: function(template, data) {
+      var self = this;
       $.ajax({
         type: 'GET',
-        url: C.viewDirectory() + template + '.html',
+        url: self.base_path + template + '.html',
         success: function(res) {
           if ($("#" + template).length === 0) { $("body").append(res); };
           var append_int = setInterval(function() {
