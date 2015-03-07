@@ -29,11 +29,20 @@ module.exports = function(grunt) {
         dest: 'build/frames.<%= pkg.version %>.min.js'
       }
     },
+    copy: {
+      main: {
+        files: [
+          // includes files within path and its sub-directories
+          {expand: true, src: ['src/views/**'], dest: 'build/'},
+        ],
+      },
+    },
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-exec');
 
