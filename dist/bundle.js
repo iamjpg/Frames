@@ -4082,8 +4082,8 @@ router.init('/welcome');
 var Config = (function() {
   var config = {
 
-    viewDirectory: function() {
-      return (typeof FRAMES_VIEW_DIR === "undefined") ? '/src/views/' : FRAMES_VIEW_DIR;
+    packageName: function() {
+      return (typeof FRAMES_PACKAGE_NAME === "undefined") ? 'frames' : FRAMES_PACKAGE_NAME;
     }
 
   }
@@ -4156,10 +4156,9 @@ var Frames = (function() {
             src = scripts[i].src;
             l = src.length;
             length = src.substr(src.lastIndexOf('/') + 1).length;
-            if (src.indexOf("frames.") > -1 || src.indexOf("dist/bundle.") > -1) {
+            if (src.indexOf(C.packageName() + ".") > -1 || src.indexOf("dist/bundle.") > -1) {
               _ths.base_path = src.substr(0, l - length);
               _ths.base_path = _ths.base_path + '../';
-              console.log(_ths.base_path);
             }
             _results.push(--i);
           }

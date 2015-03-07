@@ -2,8 +2,8 @@
 var Config = (function() {
   var config = {
 
-    viewDirectory: function() {
-      return (typeof FRAMES_VIEW_DIR === "undefined") ? '/src/views/' : FRAMES_VIEW_DIR;
+    packageName: function() {
+      return (typeof FRAMES_PACKAGE_NAME === "undefined") ? 'frames' : FRAMES_PACKAGE_NAME;
     }
 
   }
