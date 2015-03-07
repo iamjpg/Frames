@@ -6,6 +6,30 @@ var _ = require('underscore');
 var Frames = (function() {
 
   Frames = {
+    getRootDir: function() {
+      var hash, _ths;
+      _ths = this;
+      if (!this.base_path) {
+        (function(name) {
+          var i, l, length, scripts, src, _results;
+          scripts = document.getElementsByTagName("script");
+          i = scripts.length - 1;
+          _results = [];
+          while (i >= 0) {
+            src = scripts[i].src;
+            l = src.length;
+            length = src.substr(src.lastIndexOf('/') + 1).length;
+            if (src.indexOf("frames.") > -1 || src.indexOf("dist/bundle.") > -1) {
+              _ths.base_path = src.substr(0, l - length);
+              _ths.base_path = _ths.base_path + "../"
+              console.log(_ths.base_path);
+            }
+            _results.push(--i);
+          }
+          return _results;
+        })();
+      }
+    },
     subscribe: function(name, callback) {
       P.unsubscribe(name);
       P.subscribe(name, callback);

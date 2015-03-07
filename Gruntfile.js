@@ -26,7 +26,7 @@ module.exports = function(grunt) {
       },
       build: {
         src: './dist/bundle.js',
-        dest: 'build/<%= pkg.version %>.min.js'
+        dest: 'build/frames.<%= pkg.version %>.min.js'
       }
     },
   });

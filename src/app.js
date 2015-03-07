@@ -1,6 +1,9 @@
-var welcome = require('./controllers/welcome'),
+var core = require('./frames/core'),
+    welcome = require('./controllers/welcome'),
     about = require('./controllers/about'),
     docs = require('./controllers/docs');
+
+core.getRootDir();
 
 var routes = {
   '/welcome': function() {

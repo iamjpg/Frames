@@ -4054,9 +4054,12 @@ exports.$ = exports.Zepto = Zepto;
   }
 })(Zepto)
 },{}],5:[function(require,module,exports){
-var welcome = require('./controllers/welcome'),
+var core = require('./frames/core'),
+    welcome = require('./controllers/welcome'),
     about = require('./controllers/about'),
     docs = require('./controllers/docs');
+
+core.getRootDir();
 
 var routes = {
   '/welcome': function() {
@@ -4074,7 +4077,7 @@ var router = require('director').Router(routes);
 
 router.init('/welcome');
 
-},{"./controllers/about":7,"./controllers/docs":8,"./controllers/welcome":9,"director":1}],6:[function(require,module,exports){
+},{"./controllers/about":7,"./controllers/docs":8,"./controllers/welcome":9,"./frames/core":10,"director":1}],6:[function(require,module,exports){
 
 var Config = (function() {
   var config = {
@@ -4140,6 +4143,30 @@ var _ = require('underscore');
 var Frames = (function() {
 
   Frames = {
+    getRootDir: function() {
+      var hash, _ths;
+      _ths = this;
+      if (!this.base_path) {
+        (function(name) {
+          var i, l, length, scripts, src, _results;
+          scripts = document.getElementsByTagName("script");
+          i = scripts.length - 1;
+          _results = [];
+          while (i >= 0) {
+            src = scripts[i].src;
+            l = src.length;
+            length = src.substr(src.lastIndexOf('/') + 1).length;
+            if (src.indexOf("frames.") > -1 || src.indexOf("dist/bundle.") > -1) {
+              _ths.base_path = src.substr(0, l - length);
+              _ths.base_path = _ths.base_path + "../"
+              console.log(_ths.base_path);
+            }
+            _results.push(--i);
+          }
+          return _results;
+        })();
+      }
+    },
     subscribe: function(name, callback) {
       P.unsubscribe(name);
       P.subscribe(name, callback);
