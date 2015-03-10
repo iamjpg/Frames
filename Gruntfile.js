@@ -8,8 +8,8 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: 'src/**/*.js',
-      tasks: ['browserify', 'default']
+      files: ['src/**/*.js', 'src/**/*.html'],
+      tasks: ['copy', 'browserify', 'default']
     },
     concat: {
       options: {
@@ -26,16 +26,24 @@ module.exports = function(grunt) {
       },
       build: {
         src: './dist/bundle.js',
-        dest: 'build/<%= pkg.version %>.min.js'
+        dest: 'build/<%= pkg.name %>.<%= pkg.version %>.min.js'
       }
+    },
+    copy: {
+      main: {
+        files: [
+          {expand: true, cwd: 'src/', src: ['views/**'], dest: 'build/'}
+        ],
+      },
     },
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-exec');
 
-  grunt.registerTask('default', ['browserify', 'watch']);
+  grunt.registerTask('default', ['browserify', 'watch', 'copy']);
 }

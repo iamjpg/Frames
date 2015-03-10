@@ -28,7 +28,8 @@
     "grunt-browserify": "^3.4.0",
     "zepto": "0.0.4",
     "director": "^1.2.8",
-    "pubsub-js": "^1.5.0"
+    "pubsub-js": "^1.5.0",
+    "grunt-contrib-copy": "^0.8.0"
   },
   "dependencies": {
     "zepto-browserify": "^1.1.3-0",

@@ -4075,8 +4075,8 @@ router.init('/');
 var Config = (function() {
   var config = {
 
-    viewDirectory: function() {
-      return (typeof FRAMES_VIEW_DIR === "undefined") ? '/src/views/' : FRAMES_VIEW_DIR;
+    packageName: function() {
+      return (typeof FRAMES_PACKAGE_NAME === "undefined") ? 'frames' : FRAMES_PACKAGE_NAME;
     }
 
   }
@@ -4129,6 +4129,29 @@ var _ = require('underscore');
 var Frames = (function() {
 
   Frames = {
+    getRootDir: function() {
+      var hash, _ths;
+      _ths = this;
+      if (!this.base_path) {
+        (function(name) {
+          var i, l, length, scripts, src, _results;
+          scripts = document.getElementsByTagName("script");
+          i = scripts.length - 1;
+          _results = [];
+          while (i >= 0) {
+            src = scripts[i].src;
+            l = src.length;
+            length = src.substr(src.lastIndexOf('/') + 1).length;
+            if (src.indexOf(C.packageName() + ".") > -1 || src.indexOf("dist/bundle.") > -1) {
+              _ths.base_path = src.substr(0, l - length);
+              _ths.base_path = _ths.base_path + '../';
+            }
+            _results.push(--i);
+          }
+          return _results;
+        })();
+      }
+    },
     subscribe: function(name, callback) {
       P.unsubscribe(name);
       P.subscribe(name, callback);
@@ -4137,30 +4160,42 @@ var Frames = (function() {
       P.publish(name, data);
     },
     render: function(template, data) {
-      $.ajax({
-        type: 'GET',
-        url: C.viewDirectory() + template + '.html',
-        success: function(res) {
-          if ($("#" + template).length === 0) { $("body").append(res); };
-          var append_int = setInterval(function() {
-            if ($("#" + template).length > 0) {
-              clearInterval(append_int);
-              var compiled = _.template($("#" + template).html());
-              $("#yield").html(compiled(data));
-            }
-          }, 10)
+      var self = this;
 
-        },
-        error: function(x, y, z) {
-          console.log(x,y,z);
-        }
-      })
+      var r = function() {
+        var append_int = setInterval(function() {
+          if ($("#" + template).length > 0) {
+            clearInterval(append_int);
+            var compiled = _.template($("#" + template).html());
+            $("#yield").html(compiled(data));
+          }
+        }, 10)
+      }
+
+
+      if ($("#" + template).length === 0) {
+        $.ajax({
+          type: 'GET',
+          url: self.base_path + 'build/views/' + template + '.html',
+          success: function(res) {
+            $("body").append(res);
+            r();
+          },
+          error: function(x, y, z) {
+            console.log(x,y,z);
+          }
+        });
+      } else {
+        r();
+      }
     }
   }
 
   return Frames;
 
 })();
+
+Frames.getRootDir();
 
 module.exports = Frames;
 
