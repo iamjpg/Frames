@@ -4159,7 +4159,7 @@ var Frames = (function() {
     publish: function(name, data) {
       P.publish(name, data);
     },
-    render: function(template, data) {
+    render: function(template, data, options) {
       var self = this;
 
       var r = function() {
@@ -4167,11 +4167,14 @@ var Frames = (function() {
           if ($("#" + template).length > 0) {
             clearInterval(append_int);
             var compiled = _.template($("#" + template).html());
-            $("#yield").html(compiled(data));
+            if (options && options.appendTo) {
+              $(options.appendTo).html(compiled(data));
+            } else {
+              $("#yield").html(compiled(data));
+            }
           }
         }, 10)
       }
-
 
       if ($("#" + template).length === 0) {
         $.ajax({
