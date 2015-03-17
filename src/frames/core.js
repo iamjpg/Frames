@@ -31,49 +31,12 @@ var Frames = (function() {
       }
     },
     subscribe: function(name, callback) {
-      NProgress.start();
-      NProgress.inc();
       P.unsubscribe(name);
       P.subscribe(name, callback);
     },
     publish: function(name, data) {
       P.publish(name, data);
     },
-    render: function(template, data, options) {
-      var self = this;
-
-      var r = function() {
-        var append_int = setInterval(function() {
-          if ($("#" + template).length > 0) {
-            clearInterval(append_int);
-            var compiled = _.template($("#" + template).html());
-            if (options && options.appendTo) {
-              $(options.appendTo).html(compiled(data));
-            } else {
-              $("#yield").html(compiled(data));
-            }
-
-            NProgress.done();
-          }
-        }, 10)
-      }
-
-      if ($("#" + template).length === 0) {
-        $.ajax({
-          type: 'GET',
-          url: self.base_path + 'build/views/' + template + '.html',
-          success: function(res) {
-            $("body").append(res);
-            r();
-          },
-          error: function(x, y, z) {
-            console.log(x,y,z);
-          }
-        });
-      } else {
-        r();
-      }
-    }
   }
 
   return Frames;

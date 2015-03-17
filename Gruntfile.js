@@ -9,7 +9,7 @@ module.exports = function(grunt) {
     },
     watch: {
       files: ['src/**/*.js', 'src/**/*.html'],
-      tasks: ['copy', 'browserify', 'default']
+      tasks: ['jst', 'copy', 'browserify', 'default']
     },
     concat: {
       options: {
@@ -36,12 +36,20 @@ module.exports = function(grunt) {
         ],
       },
     },
+    jst: {
+      compile: {
+        files: {
+          "dist/templates.js": ["src/views/**/*.html"]
+        }
+      }
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-jst');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-exec');
 

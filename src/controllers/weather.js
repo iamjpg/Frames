@@ -1,6 +1,6 @@
 var weather = require('../models/weather');
-var Frames = require('../frames/core');
-var NProgress = require('nprogress');
+var Frames = require('../frames/core')
+var $ = require('zepto-browserify').$;
 
 var Weather = (function() {
 
@@ -8,7 +8,7 @@ var Weather = (function() {
 
   mod.init = function(city, state) {
     Frames.subscribe("WEATHER_RESPONSE", function(msg, data) {
-      Frames.render('weather', data);
+      $('#yield').html(JST['src/views/weather.html'](data))
     });
     weather.getWeather(city, state);
   }

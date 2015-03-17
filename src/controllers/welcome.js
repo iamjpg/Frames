@@ -1,8 +1,10 @@
-var Frames = require('../frames/core');
+
+var $ = require('zepto-browserify').$;
+
 var Welcome = (function() {
   mod = {
     init: function() {
-      Frames.render('welcome')
+      $('#yield').html(JST['src/views/welcome.html']())
     }
   }
 

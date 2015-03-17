@@ -1,5 +1,8 @@
+var Frames = require('./frames/core');
 var weather = require('./controllers/weather');
 var welcome = require('./controllers/welcome');
+var _ = require('underscore');
+window._ = window._ || _;
 
 var routes = {
   '': function() {
