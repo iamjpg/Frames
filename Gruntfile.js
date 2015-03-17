@@ -17,35 +17,29 @@ module.exports = function(grunt) {
         tasks: ['jst']
       }
     },
-    concat: {
-      options: {
-        separator: ';',
-      },
-      dist: {
-        src: ['src/contrib/*.js', 'dist/bundle.js'],
-        dest: 'dist/bundle.js',
-      },
-    },
-    uglify: {
-      options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-      },
-      build: {
-        src: './dist/bundle.js',
-        dest: 'build/<%= pkg.name %>.<%= pkg.version %>.min.js'
-      }
-    },
-    copy: {
-      main: {
-        files: [
-          {expand: true, cwd: 'src/', src: ['views/**'], dest: 'build/'}
-        ],
-      },
-    },
     jst: {
       compile: {
         files: {
           "dist/templates.js": ["src/views/**/*.html"]
+        }
+      }
+    },
+    usemin: {
+      html: ['index.html'],
+    },
+    useminPrepare: {
+      options: {
+        dest: 'build'
+      },
+      html: 'index.html'
+    },
+    wrap: {
+      basic: {
+        expand: false,
+        src: ['./build/build.js'],
+        dest: '.',
+        options: {
+          wrapper: ['(function() {\n', '\n})();']
         }
       }
     }
@@ -57,7 +51,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jst');
   grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-usemin');
   grunt.loadNpmTasks('grunt-exec');
+  grunt.loadNpmTasks('grunt-wrap');
 
   grunt.registerTask('default', ['watch']);
+  grunt.registerTask('build', [
+    'useminPrepare',
+    'concat:generated',
+    'uglify:generated'
+  ]);
 }
