@@ -42,6 +42,17 @@ module.exports = function(grunt) {
           wrapper: ['(function() {\n', '\n})();']
         }
       }
+    },
+    clean: {
+      build: {
+        src: ['./build']
+      }
+    },
+    rename: {
+      rn: {
+        src: './build/build.js',
+        dest: './build/<%= pkg.name %>.<%= pkg.version %>.js'
+      },
     }
   });
 
@@ -49,16 +60,21 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-jst');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-usemin');
   grunt.loadNpmTasks('grunt-exec');
   grunt.loadNpmTasks('grunt-wrap');
+  grunt.loadNpmTasks('grunt-rename');
 
   grunt.registerTask('default', ['watch']);
   grunt.registerTask('build', [
+    'clean',
     'useminPrepare',
     'concat:generated',
-    'uglify:generated'
+    'uglify:generated',
+    'wrap',
+    'rename'
   ]);
 }
