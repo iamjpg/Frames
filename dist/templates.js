@@ -18,7 +18,7 @@ this["JST"]["src/views/welcome.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '\n  <p>Frames is a fun little Javascript MVC Framework.</p>\n  <p>Click on a link above to interact with <a href="http://openweathermap.org">openweathermap.org</a></p>\n';
+__p += '\n  <p>Frames is a fun little Javascript MVC Framework. I Promise, it is!</p>\n  <p>Click on a link above to interact with <a href="http://openweathermap.org">openweathermap.org</a></p>\n';
 
 }
 return __p
