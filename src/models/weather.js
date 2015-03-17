@@ -15,8 +15,7 @@ var Weather = (function() {
       success: function(res) {
         Frames.publish("WEATHER_RESPONSE", res);
       }
-
-    })
+    });
   }
 
   return mod;

@@ -1,5 +1,6 @@
 var weather = require('../models/weather');
 var Frames = require('../frames/core');
+var NProgress = require('nprogress');
 
 var Weather = (function() {
 

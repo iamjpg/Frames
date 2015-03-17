@@ -2,6 +2,7 @@ var $ = require('zepto-browserify').$;
 var P = require('pubsub-js');
 var C = require('../config/frames_config');
 var _ = require('underscore');
+var NProgress = require('nprogress');
 
 var Frames = (function() {
 
@@ -30,6 +31,8 @@ var Frames = (function() {
       }
     },
     subscribe: function(name, callback) {
+      NProgress.start();
+      NProgress.inc();
       P.unsubscribe(name);
       P.subscribe(name, callback);
     },
@@ -49,6 +52,8 @@ var Frames = (function() {
             } else {
               $("#yield").html(compiled(data));
             }
+
+            NProgress.done();
           }
         }, 10)
       }
