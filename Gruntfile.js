@@ -8,8 +8,14 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: ['src/**/*.js', 'src/**/*.html'],
-      tasks: ['jst', 'copy', 'browserify', 'default']
+      browserify: {
+        files: ['src/**/*.js'],
+        tasks: ['browserify', 'default']
+      },
+      templates: {
+        files: ['src/**/*.html'],
+        tasks: ['jst']
+      }
     },
     concat: {
       options: {
@@ -53,5 +59,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-exec');
 
-  grunt.registerTask('default', ['browserify', 'watch', 'copy']);
+  grunt.registerTask('default', ['watch']);
 }
