@@ -6,7 +6,7 @@ var Weather = (function() {
 
   mod.getWeather = function(city, state) {
     var req = 'http://api.openweathermap.org/data/2.5/weather?q=' +
-      city + ',' + state + '&units=imperial';
+      city + '&units=imperial&appid=50c2a12fb9f8bbc253dabe922c32d66e';
 
     $.ajax({
       type: "get",

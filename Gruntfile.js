@@ -37,7 +37,7 @@ module.exports = function(grunt) {
       basic: {
         expand: false,
         src: ['./build/build.js'],
-        dest: '.',
+        dest: './',
         options: {
           wrapper: ['(function() {\n', '\n})();']
         }
